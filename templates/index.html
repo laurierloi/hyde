@@ -49,21 +49,28 @@
         {% endblock sidebar %}
 
         <div class="content container">
-            {% block content %}
-                <div class="posts">
-                    {% for page in section.pages | reverse %}
+          {% block content %}
+            <div class="posts">
+              <h1 class="title">
+                {{ section.title }}
+              </h1>
+              {% for year, pages in section.pages | group_by(attribute="year") %}
+                <h1>{{ year }}</h1>
+
+                <u1>
+                {% for page in pages %}
                       <div class="post">
                         <h1 class="post-title">
                           <a href="{{ page.permalink }}">
                             {{ page.title }}
                           </a>
                         </h1>
-
                         <span class="post-date">{{ page.date | date(format="%Y-%m-%d") }}</span>
-                      </div>
-                    {% endfor %}
-                </div>
-            {% endblock content %}
+                {% endfor %}
+                </u1>
+              {% endfor %}
+            </div>
+          {% endblock content %}
         </div>
 
     </body>
